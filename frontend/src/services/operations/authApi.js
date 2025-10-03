@@ -30,9 +30,13 @@ export const signin = async (email, password) => {
         })
 
         if(response.status === 200) {
-            
+            localStorage.setItem("token", JSON.stringify(response.data.token));
+            return response.data.token;
+        } else {
+            throw new Error(response.data.message);
         }
     } catch (error) {
-        
+        console.log("Login error...", error.message);
+        console.log("Error in login");
     }
 }
