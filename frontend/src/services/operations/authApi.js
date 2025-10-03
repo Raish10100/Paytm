@@ -1,0 +1,38 @@
+import { apiConnector } from "../apiConnector";
+const BASE_URL = import.meta.env.VITE_API_URL;
+
+export const signup = async (firstName, lastName, email, password) => {
+    try{
+        // console.log(VITE_API_URL);
+        const response = await apiConnector("POST", `${BASE_URL}/user/signup`, {
+            firstName: firstName,
+            lastName: lastName,
+            username: email,
+            password: password,
+        });
+
+        if(!response.status) {
+            throw new Error(response.data.message);
+        } else {
+            return response.data.message;
+        }
+    } catch(error) {
+        console.log("Signup error...", error);
+    }
+}
+
+
+export const signin = async (email, password) => {
+    try {
+        const response = await apiConnector("POST", `${BASE_URL}/user/signin`, {
+            username: email,
+            password
+        })
+
+        if(response.status === 200) {
+            
+        }
+    } catch (error) {
+        
+    }
+}
