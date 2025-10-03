@@ -58,15 +58,15 @@ const Signup = () => {
           <InputBox
             label={"First Name"}
             placeholder={"John"}
-            name={"firstname"}
-            value={formData.firstname}
+            name={"firstName"}
+            value={formData.firstName}
             onChange={changeHandler}
           />
           <InputBox
             label={"Last Name"}
             placeholder={"Doe"}
-            name={"lastname"}
-            value={formData.lastname}
+            name={"lastName"}
+            value={formData.lastName}
             onChange={changeHandler}
           />
           <InputBox

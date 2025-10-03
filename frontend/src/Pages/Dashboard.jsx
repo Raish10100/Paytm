@@ -1,9 +1,30 @@
+import { useEffect, useState } from "react";
+import Appbar from "../components/Appbar";
+import Balance from "../components/Balance";
+import { useRecoilValue } from "recoil";
+import { tokenAtom, userAtom } from "../store/atoms";
+import { getBalance } from "../services/operations/transactionApi";
+import { Users } from "../components/Users";
+
 const Dashboard = () => {
+  const [balance, setBalance] = useState("");
+  const token = useRecoilValue(tokenAtom);
+  const user = useRecoilValue(userAtom);
+
+  useEffect(() => {
+    const fetchBalance = async () => {
+      const userBalance = await getBalance(token);
+      setBalance(userBalance);
+    };
+    fetchBalance();
+  }, [token]);
+
   return (
-    <>
-      <h1 className="">Dashboard page</h1>
-      <h1 className="text-3xl text-red-400 font-bold underline">Hello world!</h1>
-    </>
+    <div>
+      <Appbar user={user.firstName} />
+      <Balance balance={balance} />
+      <Users />
+    </div>
   );
 };
 
